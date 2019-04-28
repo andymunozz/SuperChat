@@ -190,7 +190,7 @@ private:
           do_accept();
         });
   }
-void delete_client(chat_participant_ptr participany, string filename, string client_name)
+void delete_client(chat_participant_ptr participant, string filename, string client_name)
 {
 	std::string name, pw;
 	std::ifstream file;
