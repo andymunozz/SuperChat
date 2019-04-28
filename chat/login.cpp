@@ -1,26 +1,60 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <ncurses.h>
 
 std::string User;
 std::string Pass;
 
+
+
 void Register()
 {
+    
     std::ifstream file;
     std::ofstream newUser;
-    std::string Username, Password, Password_c;
-    file.open("Users.txt", std::ios::app);
-    newUser.open("Users.txt", std::ios::app);
+    int n=500;
+    char Username[n]; 
+    char Password[n]; 
+    char confirm[n];
+    file.open("User.txt", std::ios::app);
+    newUser.open("User.txt", std::ios::app);
     bool Uservalid = false;
-    while (!Uservalid)
+    
+     int height,width;
+	height=20;
+	width=49;
+
+   while (!Uservalid)
     {
-        std::cout << "\nEnter your Username: ";
-        getline(std::cin, Username);
-        std::cout << "Enter your Password: ";
-        getline(std::cin, Password);
-        std::cout << "Confirm your Password: ";
-        getline(std::cin, Password_c);
+        
+	initscr();
+	WINDOW *win2= newwin(height,width,10,75);	
+	refresh();
+	box(win2,0,0);
+
+	mvwprintw(win2,1,2,"Enter your Username: \n");
+        wmove(win2,2,2);
+	wgetnstr(win2,Username,n);
+	//getline(std::cin, Username);
+        
+
+	mvwprintw(win2,3,2,"Enter your Password: \n");
+	//std::cout << "Enter your Password: ";
+	wmove(win2,4,2);
+	wgetnstr(win2,Password,n);
+	//getline(std::cin, Password);
+        
+
+	mvwprintw(win2,5,2,"Enter your Password_c: \n");
+	//std::cout << "Confirm your Password: ";
+        wmove(win2,6,2);
+	wgetnstr(win2,confirm,n);
+	//getline(std::cin, Password_c);
+	
+	wrefresh(win2);
+	refresh();
+	endwin();
 
         int m=0;
         int k=0;
@@ -31,14 +65,17 @@ void Register()
             if (Username!=User)
                 k++;
         }
-        if (m == k && Password == Password_c)
+        if (/*m == k &&*/ Password != confirm)
             Uservalid = true;
 
         else if (m != k)
-            std::cout << "This Username already exist." << std::endl;
+            //mvwprintw(win2,7,2,"This Username already exist \n");
+		std::cout << "This Username already exist." << std::endl;
         else
-            std::cout << "The Passwords given do not match." << std::endl;
-    }
+          //mvwprintw(win2,8,2,"The Passwords given do not match \n");  
+	 std::cout << "The Passwords given do not match." << std::endl;
+    
+	}
     newUser << Username << " " << Password << std::endl;;
     file.close();
     newUser.close();
@@ -71,7 +108,7 @@ int main()
 {
     int loginattempts = 0;
     std::ifstream Userfile;
-    Userfile.open("Users.txt");
+    Userfile.open("User.txt");
     std::string option;
     if (!Userfile.is_open())
     {

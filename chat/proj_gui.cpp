@@ -2,7 +2,9 @@
 #include <string>
 #include <iostream>
 #include "chat_message.hpp"
+#include "login.h"
 using namespace std;
+
 
 
 void lobby()
@@ -33,6 +35,7 @@ void sign_up()
 	int height,width;
 	char* name=new char[100];
 	char* ID=new char[100];
+	//Login login1;
 	height=10;
 	width=49;
 
@@ -42,21 +45,16 @@ void sign_up()
 		
 	box(win2,0,0);
 	
-	
 	mvwprintw(win2,1,2,"Hello please enter your name and ID\n");	
 	
-	wmove(win2,2,2);
-	wgetstr(win2,name);
-	wmove(win2,3,2);
-	wgetstr(win2,ID);
-	
+	Register();
+
 	wrefresh(win2);
 
 	refresh();
 	endwin();
 	lobby();
-	delete name;
-	delete ID;
+	
 
 }
 
@@ -141,8 +139,9 @@ void start_up_window()
 
 int main(int argc, char **argv)
 {
-	
+	//Login login1;
 	start_up_window();
+	//login1.start_up();
 	return 0;
 	
 }
