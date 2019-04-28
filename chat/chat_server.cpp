@@ -190,7 +190,27 @@ private:
           do_accept();
         });
   }
+void delete_client(chat_participant_ptr participany, string filename, string client_name)
+{
+	std::string name, pw;
+	std::ifstream file;
 
+	file.open("Users.txt");
+	std::ofstream temp;
+	temp.open("temp.txt");
+	while(file>>name>>pw))
+	{
+		if(name!=client_name)
+		{
+			temp<<name<<" "<<pw<<std::endl;
+		}
+	}
+	temp.close();
+	file.close();
+	remove("Users.txt");
+	rename("temp.txt","Users.txt");
+	std::cout<<client_name<<" has been deleted"<<std::endl
+}
   tcp::acceptor acceptor_;
   chat_room room_;
 };
