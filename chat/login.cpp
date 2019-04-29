@@ -56,7 +56,11 @@ void login()
         	wmove(win3,3,2);
 		wgetnstr(win3,User2,m);
 		mvwprintw(win3,4,2,"Enter your Password: \n");
-        	wmove(win3,5,2);
+        	
+
+		wattron(win3,A_INVIS);
+		wmove(win3,5,2);
+		wattroff(win3,A_INVIS);
 		wgetnstr(win3,Pass2,m);
 		
 		
@@ -118,17 +122,18 @@ void Register()
         
 
 	mvwprintw(win2,4,2,"Enter your Password: \n");
-	//std::cout << "Enter your Password: ";
 	wmove(win2,5,2);
+	
+	wattron(win2,A_INVIS);
 	wgetnstr(win2,Password,n);
-	//getline(std::cin, Password);
-        
+        wattroff(win2,A_INVIS);
 
 	mvwprintw(win2,6,2,"Enter your Password_c: \n");
-	//std::cout << "Confirm your Password: ";
         wmove(win2,7,2);
+	
+	wattron(win2,A_INVIS);
 	wgetnstr(win2,confirm,n);
-	//getline(std::cin, Password_c);
+	wattroff(win2,A_INVIS);
 	
 	wrefresh(win2);
 	refresh();
