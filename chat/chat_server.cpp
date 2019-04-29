@@ -51,6 +51,7 @@ public:
   {
     participants_.erase(participant);
   }
+  
 
   void deliver(const chat_message& msg)
   {
@@ -87,6 +88,19 @@ public:
     do_read_header();
   }
 
+  void lobby_active()
+  {
+	  std::string name, pw;
+	  std::ifstream file;
+	  file.open("Users.txt");
+
+	  std::cout<<"ACTIVE:\n"<<std::endl;
+	  while(file>>name>>pw)
+	  {
+		  std::cout<<name<<"\n"<<std::endl;
+	  }
+	  file.close();
+  }
   void deliver(const chat_message& msg)
   {
     bool write_in_progress = !write_msgs_.empty();
