@@ -204,6 +204,11 @@ private:
           do_accept();
         });
   }
+  void delete_chatroom(room& r, chat_participant_ptr ch)
+  {
+	  r.leave(ch);
+	  std::cout<<"chatroom deleted"<<std::endl;
+  }
 void delete_client(chat_participant_ptr participant, string filename, string client_name)
 {
 	std::string name, pw;
