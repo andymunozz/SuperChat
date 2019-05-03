@@ -21,10 +21,14 @@
 using asio::ip::tcp;
 
 //----------------------------------------------------------------------
-
+std::vector<std::string>total_clients;
+std::vector<chatroom>total_chatrooms;
+total_chatrooms={chatroom("LOBBY")};
+_
 typedef std::deque<chat_message> chat_message_queue;
 
 //----------------------------------------------------------------------
+
 
 class chat_participant
 {
@@ -69,6 +73,16 @@ private:
   chat_message_queue recent_msgs_;
 };
 
+class chatroom
+{
+	std::string chat_name;
+	std::vector<std::string> all_messages;
+	std::vector<std::string> clients;
+	chatroom(std::string cn)
+	{
+		cn=chat_name;
+	}
+};
 //----------------------------------------------------------------------
 
 class chat_session
