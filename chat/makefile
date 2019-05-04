@@ -1,23 +1,20 @@
 CXX=g++
 
-CPPFLAGS=-I/home/student/Desktop/SuperChat/chat/include
+CXXFLAGS= -Wall -O0 -g -std=c++11
 
-CXXFLAGS=-Wall -O0 -g -std=c++11
+CPPFLAGS=-I ./chat/include/
 
 all: chat_client chat_server
+	mv chat_client -t .. && mv chat_server -t ..
 
-COMMON_HEADER = chat_message.hpp
+chat_client.o: chat_client.cpp chat_message.hpp 
 
-chat_client.o: ${COMMON_HEADER} chat_client.cpp
+chat_server.o: chat_server.cpp chat_message.hpp
 
-chat_client:chat_client.o
-	${CXX} -o chat_client chat_client.o -lpthread -lncurses
-
-chat_server.o: ${COMMON_HEADER} chat_message.hpp chat_server.cpp
-
-chat_server:chat_server.o
+chat_client: chat_client.o
+	${CXX} -o chat_client chat_client.o SuperChat_GUI.cpp -lpthread -lncurses ${CPPFLAGS}
+chat_server: chat_server.o
 	${CXX} -o chat_server chat_server.o -lpthread
-
 clean:
-	-rm -f chat_client chat_server chat_client.o chat_server.o
+	rm -f *.o && cd .. && rm -f chat_client chat_server
 
