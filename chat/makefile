@@ -12,7 +12,7 @@ chat_client.o: chat_client.cpp chat_message.hpp
 chat_server.o: chat_server.cpp chat_message.hpp
 
 chat_client: chat_client.o
-	${CXX} -o chat_client chat_client.o SuperChat_GUI.cpp -lpthread -lncurses ${CPPFLAGS}
+	${CXX} -o chat_client chat_client.o -lpthread -lncurses ${CPPFLAGS}
 chat_server: chat_server.o
 	${CXX} -o chat_server chat_server.o -lpthread
 clean:
